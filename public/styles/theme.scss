@@ -1,0 +1,280 @@
+/* 
+usage of the file: 
+@use "styles/theme"as *;
+*/
+$breakPoint_xs: "450px";
+$breakPoint_mobile: "990px";
+$breakPoint_largeDesktop: "1200px";
+
+$spacing_sm: 2%;
+$spacing_lg: 5%;
+$spacing_betweenComponents: 40px;
+
+$color_centraYellow: #f2ff56;
+$color_centraBlue: #005db9;
+$color_centraBlue_hover: #0273e2;
+
+$color_white: #ffffff;
+$color_gray: #f0f0f0;
+$color_gray_dark: #b0b0b0;
+$color_dark: #444444;
+$color_red: red;
+
+$layer_behind: -1;
+
+$layer_div_on_background: 1;
+$layer_nav: 2000;
+$layer_nav_popup: 1999;
+$layer_nav_modal: 2010;
+
+$fontsize_h1: 30px;
+$fontsize_imageDescription: 18px;
+
+@mixin divider() {
+  margin-top: 29.5px;
+  margin-bottom: 29.5px;
+  height: 1px;
+  border: 1px solid #d8d8d8;
+}
+
+// Breakpoints. sm/lg/xl
+/*
+  usage:
+  @include breakpoint-max(sm) {
+    * codes here *
+  }
+*/
+@mixin breakpoint-max($point) {
+  @if $point ==sm {
+    @media (max-width: $breakPoint_mobile) {
+      @content;
+    }
+  } @else if $point ==lg {
+    @media (max-width: $breakPoint_largeDesktop) {
+      @content;
+    }
+  }
+}
+
+@mixin breakpoint-min($point) {
+  @if $point ==xl {
+    @media (min-width: $breakPoint_largeDesktop) {
+      @content;
+    }
+  } @else if $point ==lg {
+    @media (min-width: $breakPoint_mobile) {
+      @content;
+    }
+  }
+}
+
+/*
+  main container. handling collapse with sticky nav
+*/
+@mixin main {
+  margin-top: 160px;
+  @include breakpoint-max(sm) {
+    margin-top: 100px;
+  }
+}
+
+/*
+  forms to sumit
+*/
+@mixin formContainer {
+  display: flex;
+  justify-content: center;
+  padding-left: 1%;
+  padding-right: 1%;
+
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 20px;
+
+  @include breakpoint-max(sm) {
+    flex-direction: column;
+    padding-left: 1%;
+    padding-right: 1%;
+    width: 100%;
+  }
+}
+@mixin form {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  .label {
+    font-family: TTCommons-Bold;
+    font-size: 18px;
+    margin: 11px 0px;
+
+    @include breakpoint-max(sm) {
+      text-align: initial;
+    }
+  }
+
+  @include breakpoint-max(sm) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .titleUploadContainer {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .uploadTitle {
+    width: 100%;
+    font-family: TTCommons-Bold;
+    font-size: 18px;
+
+    @include breakpoint-max(sm) {
+      margin-left: 0px;
+      text-align: initial;
+    }
+  }
+
+  .titleUpload {
+    font-family: TTCommons-Bold;
+    font-size: 24px;
+  }
+
+  .textUpload {
+    font-family: "TTCommons-Regular";
+    font-size: 18px;
+    white-space: pre-line;
+    width: 400px;
+    text-align: initial;
+    @include breakpoint-max(sm) {
+      width: unset;
+    }
+  }
+
+  .inputContainer {
+    flex-direction: column;
+    width: 48%;
+    position: relative;
+    display: flex;
+
+    @include breakpoint-max(sm) {
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+    }
+  }
+
+  .input {
+    height: 70px;
+    padding: 20px;
+  }
+
+  .input[type="text"]:disabled {
+    color: #b9b9b9;
+    background-color: #ffffff;
+  }
+
+  .inputContainerUpload {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    @include breakpoint-max(sm) {
+      text-align: center;
+      flex-direction: column;
+      margin-bottom: unset;
+    }
+  }
+
+  .items {
+    color: black;
+    font-family: TTCommons-Bold;
+    font-size: 14px;
+  }
+
+  .buttons {
+    text-align: center;
+    display: flex;
+    margin-bottom: 70px;
+    margin-top: 30px;
+    width: 100%;
+  }
+
+  .textAreaContainer {
+    width: 100% !important;
+  }
+
+  .textArea {
+    width: 100%;
+    height: 100px;
+    padding: 20px;
+  }
+
+  .input {
+    height: 70px;
+    padding: 20px;
+  }
+
+  select {
+    appearance: none;
+    background: url("/images/icons/arrowdown.svg");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 15px;
+    cursor: pointer;
+    background-color: $color_white;
+  }
+
+  .submitButton {
+    cursor: pointer;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    background-color: $color_centraBlue;
+    min-width: 257px;
+    height: 70px;
+    border: none;
+    color: white;
+    font-family: TTCommons-Bold;
+    font-size: 14px;
+    margin: 0 auto;
+    transition: 0.3s all;
+    padding: 0px 30px;
+    text-transform: uppercase;
+
+    &:hover {
+      transition: 0.3s all;
+      color: white;
+      background-color: $color_centraBlue_hover;
+    }
+
+    &:disabled {
+      background-color: #7cb1e6;
+    }
+  }
+
+  .fieldInfo {
+    min-height: 40px;
+    line-height: 40px;
+  }
+
+  .fieldInfoShrink {
+    min-height: 10px;
+  }
+
+  .star {
+    &::after {
+      content: "*";
+      color: $color_red;
+      padding-left: 10px;
+    }
+  }
+
+  .error {
+    color: $color_red;
+    display: block;
+  }
+}
